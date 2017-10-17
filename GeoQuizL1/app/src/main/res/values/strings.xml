@@ -14,5 +14,6 @@
 
     <string name="correct_toast">Odpowiedź poprawna!</string>
     <string name="incorrect_toast">Odpowiedź błędna!</string>
-
+    <string name="already_answered">Już odpowiedziano!</string>
+    <string name="final_notification">Punkty: </string>
 </resources>

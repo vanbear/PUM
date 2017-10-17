@@ -27,6 +27,8 @@ public class QuizActivity extends AppCompatActivity {
     };
 
     private int mCurrentIndex = 0;
+    private int mCorrectCount = 0;
+    private int mAnswered = 0;
 
     //    Bundles are generally used for passing data between various Android activities.
     //    It depends on you what type of values you want to pass, but bundles can hold all
@@ -55,6 +57,7 @@ public class QuizActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         checkAnswer(true);
+
                     }
                 }
         );
@@ -80,7 +83,8 @@ public class QuizActivity extends AppCompatActivity {
         mPreviousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCurrentIndex = (mCurrentIndex - 1) % mQuestionsBank.length;
+                mCurrentIndex = (mCurrentIndex - 1);
+                if (mCurrentIndex<0) mCurrentIndex = mQuestionsBank.length-1;
                 updateQuestion();
             }
         });
@@ -94,19 +98,44 @@ public class QuizActivity extends AppCompatActivity {
         mQuestionTextView.setText(question);
     }
 
-    private void checkAnswer(boolean userPressedTrue) {
-        boolean answerIsTrue = mQuestionsBank[mCurrentIndex].isAnswerTrue();
+    private void checkAnswer(boolean userPressedTrue)
+    {
+        Question question = mQuestionsBank[mCurrentIndex];
+        boolean answerIsTrue = question.isAnswerTrue();
 
         int toastMessageId = 0;
-
-        if (userPressedTrue == answerIsTrue) {
-            toastMessageId = R.string.correct_toast;
-        } else {
-            toastMessageId = R.string.incorrect_toast;
+        if (!question.checkIsAnswered())
+        {
+            if (userPressedTrue == answerIsTrue) {
+                toastMessageId = R.string.correct_toast;
+                question.setAnswered(true);
+                mCorrectCount++;
+                mAnswered++;
+            } else {
+                toastMessageId = R.string.incorrect_toast;
+                question.setAnswered(true);
+                mAnswered++;
+            }
+        }
+        else
+        {
+            toastMessageId = R.string.already_answered;
+            Toast toast = Toast.makeText(this, toastMessageId, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.BOTTOM,0,0);
+            toast.show();
         }
 
         Toast toast = Toast.makeText(this, toastMessageId, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP,0,0);
         toast.show();
+
+        if (mAnswered==mQuestionsBank.length)
+        {
+            toastMessageId = R.string.final_notification;
+            String message = getString(toastMessageId)+mCorrectCount+" / "+mQuestionsBank.length;
+            Toast toast1 = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+            toast1.setGravity(Gravity.BOTTOM,0,0);
+            toast1.show();
+        }
     }
 }
