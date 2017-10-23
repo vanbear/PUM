@@ -42,6 +42,7 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
 
+        // pole tekstowe z pytaniem
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +52,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        // przycisk prawda
         mTrueButton = (Button) findViewById(R.id.true_button);
         mTrueButton.setOnClickListener(
                 new View.OnClickListener() {
@@ -62,6 +64,7 @@ public class QuizActivity extends AppCompatActivity {
                 }
         );
 
+        // przycisk fałsz
         mFalseButton = (Button) findViewById(R.id.false_button);
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +73,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        // przycisk następny
         mNextButton = (ImageButton) findViewById(R.id.next_button);
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,12 +83,13 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        // przycisk poprzedni
         mPreviousButton = (ImageButton) findViewById(R.id.previous_button);
         mPreviousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mCurrentIndex = (mCurrentIndex - 1);
-                if (mCurrentIndex<0) mCurrentIndex = mQuestionsBank.length-1;
+                if (mCurrentIndex<0) mCurrentIndex = mQuestionsBank.length-1; // jeśli indeks mniejszy od zera, zmień na (długość tablicy z pytaniami -1, czyli ostatnie pytanie)
                 updateQuestion();
             }
         });
@@ -104,7 +109,7 @@ public class QuizActivity extends AppCompatActivity {
         boolean answerIsTrue = question.isAnswerTrue();
 
         int toastMessageId = 0;
-        if (!question.checkIsAnswered())
+        if (!question.checkIsAnswered() && mAnswered!=mQuestionsBank.length)
         {
             if (userPressedTrue == answerIsTrue) {
                 toastMessageId = R.string.correct_toast;
@@ -121,18 +126,16 @@ public class QuizActivity extends AppCompatActivity {
         {
             toastMessageId = R.string.already_answered;
             Toast toast = Toast.makeText(this, toastMessageId, Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.BOTTOM,0,0);
-            toast.show();
         }
 
         Toast toast = Toast.makeText(this, toastMessageId, Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.TOP,0,0);
+        toast.setGravity(Gravity.TOP,0,175);
         toast.show();
 
         if (mAnswered==mQuestionsBank.length)
         {
             toastMessageId = R.string.final_notification;
-            String message = getString(toastMessageId)+mCorrectCount+" / "+mQuestionsBank.length;
+            String message = getString(toastMessageId)+" "+mCorrectCount+" / "+mQuestionsBank.length;
             Toast toast1 = Toast.makeText(this, message, Toast.LENGTH_SHORT);
             toast1.setGravity(Gravity.BOTTOM,0,0);
             toast1.show();
