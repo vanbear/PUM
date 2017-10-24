@@ -30,10 +30,6 @@ public class QuizActivity extends AppCompatActivity {
     private int mCorrectCount = 0;
     private int mAnswered = 0;
 
-    //    Bundles are generally used for passing data between various Android activities.
-    //    It depends on you what type of values you want to pass, but bundles can hold all
-    //    types of values and pass them to the new activity.
-    //    see: https://stackoverflow.com/questions/4999991/what-is-a-bundle-in-an-android-application
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,19 +109,17 @@ public class QuizActivity extends AppCompatActivity {
         {
             if (userPressedTrue == answerIsTrue) {
                 toastMessageId = R.string.correct_toast;
-                question.setAnswered(true);
                 mCorrectCount++;
-                mAnswered++;
             } else {
                 toastMessageId = R.string.incorrect_toast;
-                question.setAnswered(true);
-                mAnswered++;
             }
+            question.setAnswered(true);
+            mAnswered++;
         }
         else
         {
             toastMessageId = R.string.already_answered;
-            Toast toast = Toast.makeText(this, toastMessageId, Toast.LENGTH_SHORT);
+            //Toast toast = Toast.makeText(this, toastMessageId, Toast.LENGTH_SHORT);
         }
 
         Toast toast = Toast.makeText(this, toastMessageId, Toast.LENGTH_SHORT);
