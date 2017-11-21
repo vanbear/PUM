@@ -19,14 +19,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cheatTokensTextView"
-        android:gravity="center"
-        android:padding="24dp"
-        android:text="Dostępnych podejrzeń: "/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/text_view_answer"
         android:padding="24dp"
         android:gravity="center"

@@ -25,6 +25,26 @@ public class QuestionBank {
         mQuestionsBank.add(new Question(R.string.question_stolica_dolnego_slaska, false));
         mQuestionsBank.add(new Question(R.string.question_sniezka, true));
         mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+        mQuestionsBank.add(new Question(R.string.question_wisla, true));
+
     }
 
     //zwraca jedno pytanie (instancję klasy)
@@ -44,5 +64,6 @@ public class QuestionBank {
     {
         return mQuestionsBank.size();
     }
+
 }
 

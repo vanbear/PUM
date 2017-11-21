@@ -30,6 +30,7 @@ public class QuizActivity extends AppCompatActivity {
 
     private TextView mQuestionTextView;
     private TextView mAPITextView;
+    private TextView mCheatCountTextView;
 
     private Button mCheatButton;
 
@@ -68,6 +69,7 @@ public class QuizActivity extends AppCompatActivity {
             // we are allowed to cast the Parcelable[] to desired type which
             // is the Question[] here.
             mQuestionsBank = (Question []) savedInstanceState.getParcelableArray(KEY_QUESTIONS);
+
             // sanity check
             if (mQuestionsBank == null)
             {
@@ -95,7 +97,8 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        // set API Level textview
+        // set API Lev
+        // el textview
         mAPITextView = (TextView) findViewById(R.id.textView_API);
         mAPITextView.setText("API Level: "+Integer.valueOf(android.os.Build.VERSION.SDK_INT).toString());
 
@@ -150,6 +153,7 @@ public class QuizActivity extends AppCompatActivity {
 
 
         updateQuestion();
+        updateCheatCount();
 
 
 
@@ -173,9 +177,10 @@ public class QuizActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG)
                             .show();
                     mQuestionsBank[mCurrentIndex].setWasCheated(true);
+                    mCheatTokens--;
+                    updateCheatCount();
                 }
 
-                mCheatTokens = CheatActivity.getCheatTokens(data);
                 Log.d("Tokens result",Integer.toString(mCheatTokens));
 
             }
@@ -202,6 +207,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         mQuestionsBank=(Question []) savedInstanceState.getParcelableArray(KEY_QUESTIONS);
         mCheatTokens = savedInstanceState.getInt(KEY_TOKENS);
+        updateCheatCount();
     }
 
     private void updateQuestion() {
@@ -221,6 +227,12 @@ public class QuizActivity extends AppCompatActivity {
         }
 
         Toast.makeText(this, toastMessageId, Toast.LENGTH_SHORT).show();
+    }
+
+    private void updateCheatCount()
+    {
+        mCheatCountTextView = (TextView) findViewById(R.id.CheatTokensTextView_QA);
+        mCheatCountTextView.setText("Podpowiedzi: "+Integer.toString(mCheatTokens));
     }
 
 }

@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GeoQuiz.iml" filepath="$PROJECT_DIR$/GeoQuiz.iml" />
+      <module fileurl="file://D:\Studia\Semestr 5\PUM\Lista 5\GeoQuiz\GeoQuiz.iml" filepath="D:\Studia\Semestr 5\PUM\Lista 5\GeoQuiz\GeoQuiz.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\Studia\Semestr 5\PUM\Lista 5\GeoQuiz\app\app.iml" filepath="D:\Studia\Semestr 5\PUM\Lista 5\GeoQuiz\app\app.iml" />
     </modules>
   </component>
 </project>

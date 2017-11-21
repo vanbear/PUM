@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class QuestionListActivity extends AppCompatActivity {
@@ -31,28 +33,31 @@ public class QuestionListActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        QuestionBank questionB = QuestionBank.getInstance();
-        mAdapter = new QuestionAdapter(questionB.getQuestions());
+        QuestionBank questionBank = QuestionBank.getInstance();
+        mAdapter = new QuestionAdapter(questionBank.getQuestions());
         mRecyclerView.setAdapter(mAdapter);
     }
+
     private class QuestionHolder extends RecyclerView.ViewHolder
     {
         private TextView mQuestionTextView;
-
+        private TextView mQuestionIndexTextView;
         private Question mQuestion;
 
         public QuestionHolder(LayoutInflater inflater, ViewGroup parent)
         {
-            super(inflater.inflate(R.layout.activity_question_list,parent,false));
-
+            super(inflater.inflate(R.layout.question_item,parent,false));
             mQuestionTextView = (TextView) itemView.findViewById(R.id.questions_item);
-
+            mQuestionIndexTextView = (TextView) itemView.findViewById(R.id.questions_item_numer);
         }
-        public void bind(Question question)
+
+        public void bind(Question question, int position)
         {
             mQuestion = question;
             mQuestionTextView.setText(mQuestion.getTextResId());
+            mQuestionIndexTextView.setText("#"+Integer.toString(position+1)+" ");
         }
+
     }
     private class QuestionAdapter extends RecyclerView.Adapter<QuestionHolder>
     {
@@ -64,13 +69,12 @@ public class QuestionListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(QuestionHolder holder, int position) {
             Question question = mQuestions.get(position);
-            holder.bind(question);
+            holder.bind(question,position);
         }
         @Override
         public QuestionHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(QuestionListActivity.this);
             return new QuestionHolder(layoutInflater,parent);
-
         }
         @Override
         public int getItemCount() {return mQuestions.size();}

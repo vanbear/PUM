@@ -19,7 +19,6 @@ public class CheatActivity extends AppCompatActivity {
     private final static String EXTRA_KEY_SHOWN = "wasShown";
     private final static String KEY_TOKENS = "CheatTokens";
     TextView mTextViewAnswer;
-    TextView mCheatTokensTextView;
     Button mButtonShow;
 
     boolean wasShown;
@@ -41,9 +40,7 @@ public class CheatActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_cheat);
 
-        mCheatTokensTextView = (TextView) findViewById(R.id.cheatTokensTextView);
         mCheatTokens =  getIntent().getIntExtra(KEY_TOKENS,0);
-        updateTokenCount();
 
         mAnswer = getIntent().getBooleanExtra(EXTRA_KEY_ANSWER,false);
 
@@ -67,8 +64,6 @@ public class CheatActivity extends AppCompatActivity {
                     setAnswerShown(true);
                     wasShown=true;
                     toastMessageId = R.string.UsedToken;
-                    mCheatTokens--;
-                    updateTokenCount();
                 }
                 Toast.makeText(CheatActivity.this, toastMessageId, Toast.LENGTH_SHORT).show();
 
@@ -113,7 +108,6 @@ public class CheatActivity extends AppCompatActivity {
         setAnswerShown(wasShown);
 
         mCheatTokens = savedInstanceState.getInt(KEY_TOKENS);
-        updateTokenCount();
         //Log.i("restore_wasShown_after","Restore Instance wasShown after if: "+Boolean.toString(wasShown));
     }
 
@@ -137,16 +131,6 @@ public class CheatActivity extends AppCompatActivity {
         Intent data = new Intent();
         data.putExtra("wasShown", isAnswerShown);
         setResult(RESULT_OK, data);
-    }
-
-
-    private void updateTokenCount()
-    {
-        mCheatTokensTextView.setText("Dostępnych podejrzeń: "+Integer.toString(mCheatTokens));
-        Intent data = new Intent();
-        data.putExtra(KEY_TOKENS, mCheatTokens);
-        setResult(RESULT_OK, data);
-
     }
 
     public static int getCheatTokens(Intent data)

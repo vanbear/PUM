@@ -116,7 +116,12 @@ This means, in which direction it's contents should align.
         android:layout_height="wrap_content"
         android:id="@+id/button_cheat"
         android:text="@string/cheat_button_label"/>
-
+    <TextView
+        android:id="@+id/CheatTokensTextView_QA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Podpowiedzi: "
+        android:textAlignment="center"/>
     <TextView
         android:id="@+id/textView_API"
         android:layout_width="match_parent"
