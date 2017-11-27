@@ -40,6 +40,8 @@ public class QuizActivityFragment extends Fragment {
     private Button mCheatButton;
     private Button mQuestionListButton;
 
+    private Question question;
+
     private Question[] mQuestionsBank = new Question[]{
             new Question(R.string.question_stolica_polski, true),
             new Question(R.string.question_stolica_dolnego_slaska, false),
@@ -53,6 +55,23 @@ public class QuizActivityFragment extends Fragment {
     //    It depends on you what type of values you want to pass, but bundles can hold all
     //    types of values and pass them to the new activity.
     //    see: https://stackoverflow.com/questions/4999991/what-is-a-bundle-in-an-android-application
+
+    public static QuizActivityFragment newInstance(UUID crimeId) {
+        Bundle args = new Bundle();
+        args.putSerializable("question_id", crimeId);
+
+        QuizActivityFragment fragment = new QuizActivityFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        int questionID = (int) getArguments().getSerializable("question_id");
+        question = QuestionBank.getInstance().getQuestion(questionID);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
