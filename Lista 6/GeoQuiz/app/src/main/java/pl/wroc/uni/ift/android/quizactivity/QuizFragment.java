@@ -60,7 +60,7 @@ public class QuizFragment extends Fragment {
     public static QuizFragment newInstance(int id)
     {
         Bundle args = new Bundle();
-        args.putSerializable(QUESTION_ID, id);
+        args.putInt(QUESTION_ID, id);
         QuizFragment fragment = new QuizFragment();
         fragment.setArguments(args);
         return fragment;
@@ -71,7 +71,7 @@ public class QuizFragment extends Fragment {
     {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
-            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
+            //mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
             mCheatTokens = savedInstanceState.getInt(KEY_TOKENS);
             Log.i(TAG, String.format("onCreate(): Restoring saved index: %d", mCurrentIndex));
             mQuestionsBank = (Question []) savedInstanceState.getParcelableArray(KEY_QUESTIONS);
@@ -83,7 +83,7 @@ public class QuizFragment extends Fragment {
                 Log.i(TAG, "Question bank array was correctly returned from Bundle");
             }
         }
-        mQuestionId = (int) getArguments().getSerializable(QUESTION_ID);
+        mQuestionId = getArguments().getInt(QUESTION_ID);
     }
 
     // @Override

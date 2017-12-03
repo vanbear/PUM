@@ -64,10 +64,10 @@ public class QuestionListFragment extends Fragment {
 
         public void onClick(View view)
         {
-            Log.d("Click","Click");
             Intent intent  = QuizPager.newIntent(getActivity(), mQuestion.getTextResId());
             adapterIndex = mAdapter.mQuestions.indexOf(mQuestion);
             intent.putExtra("currentQuestion",adapterIndex);
+            Log.d("Click","Click!"+Integer.toString(adapterIndex));
             startActivity(intent);
         }
 

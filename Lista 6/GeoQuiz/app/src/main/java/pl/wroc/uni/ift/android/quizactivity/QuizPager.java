@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 
@@ -17,7 +16,6 @@ public class QuizPager extends FragmentActivity {
 
     List<Question> mQuestions;
     private ViewPager mViewPager;
-    private PagerAdapter mPagerAdapter;
     private int mIndex;
     private static final String EXTRA_CURRENT_ID = "question_id";
 
@@ -34,6 +32,8 @@ public class QuizPager extends FragmentActivity {
         mQuestions = QuestionBank.getInstance().getQuestions();
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
 
+
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
             @Override
@@ -47,6 +47,7 @@ public class QuizPager extends FragmentActivity {
                 return mQuestions.size();
             }
         });
-
+        mIndex = getIntent().getIntExtra("currentQuestion",0);
+        mViewPager.setCurrentItem(mIndex);
     }
 }

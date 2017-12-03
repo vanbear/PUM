@@ -19,7 +19,7 @@
         <activity
             android:name=".QuizPager"
             android:label="@string/title_activity_quiz_pager"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
 
     </application>
 
