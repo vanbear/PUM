@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pl.wroc.uni.ift.android.quizactivity.QuizPagerActivityFragment"
-    tools:showIn="@layout/activity_quiz_pager">
-
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="pl.wroc.uni.ift.android.quizactivity.SingleFragmentActivity"
+    tools:showIn="@layout/activity_single_fragment">
 
 </android.support.constraint.ConstraintLayout>

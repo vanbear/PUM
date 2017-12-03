@@ -1,6 +1,5 @@
 package pl.wroc.uni.ift.android.quizactivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,9 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
 
-import java.util.UUID;
+import static android.app.Activity.RESULT_OK;
 
-public class QuizActivityFragment extends Fragment {
+public class QuizFragment extends Fragment {
 
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
@@ -24,6 +23,7 @@ public class QuizActivityFragment extends Fragment {
 
     // Key for questions array to be stored in bundle;
     private static final String KEY_QUESTIONS = "questions";
+    private static final String QUESTION_ID = "question_id";
 
     private static final int CHEAT_REQEST_CODE = 0;
 
@@ -40,8 +40,6 @@ public class QuizActivityFragment extends Fragment {
     private Button mCheatButton;
     private Button mQuestionListButton;
 
-    private Question question;
-
     private Question[] mQuestionsBank = new Question[]{
             new Question(R.string.question_stolica_polski, true),
             new Question(R.string.question_stolica_dolnego_slaska, false),
@@ -56,50 +54,25 @@ public class QuizActivityFragment extends Fragment {
     //    types of values and pass them to the new activity.
     //    see: https://stackoverflow.com/questions/4999991/what-is-a-bundle-in-an-android-application
 
-    public static QuizActivityFragment newInstance(UUID crimeId) {
-        Bundle args = new Bundle();
-        args.putSerializable("question_id", crimeId);
 
-        QuizActivityFragment fragment = new QuizActivityFragment();
+    public static QuizFragment newInstance(int id)
+    {
+        Bundle args = new Bundle();
+        args.putSerializable(QUESTION_ID, id);
+        QuizFragment fragment = new QuizFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        int questionID = (int) getArguments().getSerializable("question_id");
-        question = QuestionBank.getInstance().getQuestion(questionID);
-    }
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.activity_quiz, container, false);
-
-        super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate() called");
-
-        //setTitle(R.string.app_name);
-        // inflating view objects
-        //setContentView(R.layout.activity_quiz);
-
-
-
-        // check for saved data
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
-            Log.i(TAG, String.format("onCreate(): Restoring saved index: %d", mCurrentIndex));
-
-            // here in addition we are restoring our Question array;
-            // getParcelableArray returns object of type Parcelable[]
-            // since our Question is implementing this interface (Parcelable)
-            // we are allowed to cast the Parcelable[] to desired type which
-            // is the Question[] here.
-            mQuestionsBank = (Question []) savedInstanceState.getParcelableArray(KEY_QUESTIONS);
             mCheatTokens = savedInstanceState.getInt(KEY_TOKENS);
-            // sanity check
+            Log.i(TAG, String.format("onCreate(): Restoring saved index: %d", mCurrentIndex));
+            mQuestionsBank = (Question []) savedInstanceState.getParcelableArray(KEY_QUESTIONS);
             if (mQuestionsBank == null)
             {
                 Log.e(TAG, "Question bank array was not correctly returned from Bundle");
@@ -108,6 +81,17 @@ public class QuizActivityFragment extends Fragment {
                 Log.i(TAG, "Question bank array was correctly returned from Bundle");
             }
         }
+    }
+
+    // @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.activity_quiz, container, false);
+        Log.d(TAG, "onCreate() called");
+
+        //setTitle(R.string.app_name);
+        // inflating view objects
+        //setContentView(R.layout.activity_quiz);
 
         mCheatButton = (Button) view.findViewById(R.id.button_cheat);
         mCheatButton.setOnClickListener(new View.OnClickListener() {
@@ -187,9 +171,6 @@ public class QuizActivityFragment extends Fragment {
             }
         });
 
-
-
-
         updateQuestion();
         return view;
 
@@ -199,7 +180,7 @@ public class QuizActivityFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if(resultCode != getActivity().RESULT_OK) {
+        if(resultCode != RESULT_OK) {
             return;
         }
 
@@ -237,14 +218,13 @@ public class QuizActivityFragment extends Fragment {
         savedInstanceState.putInt(KEY_TOKENS,mCheatTokens);
     }
 
-    /*
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState)
-    {
-        super.onRestoreInstanceState(savedInstanceState);
-        mQuestionsBank=(Question []) savedInstanceState.getParcelableArray(KEY_QUESTIONS);
-        mCheatTokens = savedInstanceState.getInt(KEY_TOKENS);
-    }*/
+//    @Override
+//    public void onRestoreInstanceState(Bundle savedInstanceState)
+//    {
+//        super.onRestoreInstanceState(savedInstanceState);
+//        mQuestionsBank=(Question []) savedInstanceState.getParcelableArray(KEY_QUESTIONS);
+//        mCheatTokens = savedInstanceState.getInt(KEY_TOKENS);
+//    }
 
     private void updateQuestion() {
         int question = mQuestionsBank[mCurrentIndex].getTextResId();

@@ -24,10 +24,8 @@
     <string name="NoTokens">Wykorzystałeś już wszystkie tokeny</string>
     <string name="UsedToken">Uzyłeś podpowiedzi Straciłeś jeden token</string>
     <string name="title_activity_question_list">QuestionListActivity</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_quiz_pager">QuizPagerActivity</string>
+    <string name="title_activity_quiz_fragment">QuizFragment</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_single_fragment">SingleFragmentActivity</string>
 
 </resources>

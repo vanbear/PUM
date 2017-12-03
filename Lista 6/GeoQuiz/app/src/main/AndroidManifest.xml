@@ -21,8 +21,12 @@
             android:label="@string/title_activity_question_list"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".QuizPagerActivity"
-            android:label="@string/title_activity_quiz_pager"
+            android:name=".QuizFragment"
+            android:label="@string/title_activity_quiz_fragment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SingleFragmentActivity"
+            android:label="@string/title_activity_single_fragment"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

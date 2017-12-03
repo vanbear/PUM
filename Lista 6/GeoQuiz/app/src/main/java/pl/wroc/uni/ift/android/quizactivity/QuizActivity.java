@@ -7,6 +7,6 @@ public class QuizActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment()
     {
-        return new QuizActivityFragment();
+        return new QuizFragment();
     }
 }
