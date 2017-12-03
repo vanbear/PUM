@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,8 @@ public class QuestionListFragment extends Fragment {
 
         public QuestionHolder(LayoutInflater inflater, ViewGroup parent)
         {
-            super(inflater.inflate(R.layout.activity_question_list_fragment2,parent,false));
+            super(inflater.inflate(R.layout.question_item,parent,false));
+            itemView.setOnClickListener(this);
             mQuestionTextView = (TextView) itemView.findViewById(R.id.questions_item);
             mQuestionIndexTextView = (TextView) itemView.findViewById(R.id.questions_item_numer);
         }
@@ -62,8 +64,8 @@ public class QuestionListFragment extends Fragment {
 
         public void onClick(View view)
         {
+            Log.d("Click","Click");
             Intent intent  = QuizPager.newIntent(getActivity(), mQuestion.getTextResId());
-
             adapterIndex = mAdapter.mQuestions.indexOf(mQuestion);
             intent.putExtra("currentQuestion",adapterIndex);
             startActivity(intent);

@@ -40,6 +40,8 @@ public class QuizFragment extends Fragment {
     private Button mCheatButton;
     private Button mQuestionListButton;
 
+    private int mQuestionId;
+
     private Question[] mQuestionsBank = new Question[]{
             new Question(R.string.question_stolica_polski, true),
             new Question(R.string.question_stolica_dolnego_slaska, false),
@@ -81,6 +83,7 @@ public class QuizFragment extends Fragment {
                 Log.i(TAG, "Question bank array was correctly returned from Bundle");
             }
         }
+        mQuestionId = (int) getArguments().getSerializable(QUESTION_ID);
     }
 
     // @Override
@@ -227,7 +230,8 @@ public class QuizFragment extends Fragment {
 //    }
 
     private void updateQuestion() {
-        int question = mQuestionsBank[mCurrentIndex].getTextResId();
+        //int question = mQuestionsBank[mCurrentIndex].getTextResId();
+        int question = mQuestionId;
         mQuestionTextView.setText(question);
     }
 
