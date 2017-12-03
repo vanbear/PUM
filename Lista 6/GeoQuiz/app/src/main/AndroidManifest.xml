@@ -27,6 +27,14 @@
         <activity
             android:name=".SingleFragmentActivity"
             android:label="@string/title_activity_single_fragment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".QuizPager"
+            android:label="@string/title_activity_quiz_pager"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".QuestionListFragment"
+            android:label="@string/title_activity_question_list_fragment"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

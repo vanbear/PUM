@@ -27,5 +27,7 @@
     <string name="title_activity_quiz_fragment">QuizFragment</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_single_fragment">SingleFragmentActivity</string>
+    <string name="title_activity_quiz_pager">QuizPager</string>
+    <string name="title_activity_question_list_fragment">QuestionListFragment</string>
 
 </resources>
