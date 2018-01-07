@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
+import android.app.Activity;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -20,6 +21,8 @@ public class QuizFragment extends Fragment {
     private static final String TAG = "QuizActivity";
     private static final String KEY_INDEX = "index";
     private static final String KEY_TOKENS = "TokensCount";
+    private static final String KEY_ANSWERED = "AnsweredCount";
+    private static final String KEY_CORRECT = "CorrectCount";
 
     // Key for questions array to be stored in bundle;
     private static final String KEY_QUESTIONS = "questions";
@@ -51,6 +54,11 @@ public class QuizFragment extends Fragment {
 
     private int mCurrentIndex = 0;
 
+    Globals globals = Globals.getInstance();
+
+    //private int mCorrectCount = 0;
+    //private int mAnswered = 0;
+
     //    Bundles are generally used for passing data between various Android activities.
     //    It depends on you what type of values you want to pass, but bundles can hold all
     //    types of values and pass them to the new activity.
@@ -73,6 +81,9 @@ public class QuizFragment extends Fragment {
         if (savedInstanceState != null) {
             //mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
             mCheatTokens = savedInstanceState.getInt(KEY_TOKENS);
+//            mAnswered = savedInstanceState.getInt(KEY_ANSWERED);
+//            mCorrectCount = savedInstanceState.getInt(KEY_CORRECT);
+
             Log.i(TAG, String.format("onCreate(): Restoring saved index: %d", mCurrentIndex));
             mQuestionsBank = (Question []) savedInstanceState.getParcelableArray(KEY_QUESTIONS);
             if (mQuestionsBank == null)
@@ -91,6 +102,7 @@ public class QuizFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_quiz, container, false);
         Log.d(TAG, "onCreate() called");
+
 
         //setTitle(R.string.app_name);
         // inflating view objects
@@ -119,6 +131,7 @@ public class QuizFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(),QuestionListActivity.class);
                 startActivity(intent);
+
             }
         });
 
@@ -214,6 +227,8 @@ public class QuizFragment extends Fragment {
 
         //we still have to store current index to correctly reconstruct state of our app
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+//        savedInstanceState.putInt(KEY_CORRECT, mCorrectCount);
+//        savedInstanceState.putInt(KEY_ANSWERED, mAnswered);
 
         // because Question is implementing Parcelable interface
         // we are able to store array in Bundle
@@ -236,17 +251,45 @@ public class QuizFragment extends Fragment {
     }
 
     private void checkAnswer(boolean userPressedTrue) {
-        boolean answerIsTrue = mQuestionsBank[mCurrentIndex].isAnswerTrue();
+        Question question = mQuestionsBank[mCurrentIndex];
+        boolean answerIsTrue = question.isAnswerTrue();
 
         int toastMessageId;
 
-        if (userPressedTrue == answerIsTrue) {
-            toastMessageId = R.string.correct_toast;
-        } else {
-            toastMessageId = R.string.incorrect_toast;
+        //if (!question.checkIsAnswered() && mAnswered!=mQuestionsBank.length)
+        if (!question.checkIsAnswered())
+        {
+            if (userPressedTrue == answerIsTrue) {
+                toastMessageId = R.string.correct_toast;
+                globals.setCorrectAnswersCount(globals.getCorrectAnswersCount()+1);
+                //mCorrectCount++;
+            } else {
+                toastMessageId = R.string.incorrect_toast;
+            }
+            question.setAnswered(true);
+            globals.setAnsweredQuestionsCount(globals.getAnsweredQuestionsCount()+1);
+            // mAnswered++;
+        }
+        else
+        {
+            toastMessageId = R.string.already_answered;
+            //Toast toast = Toast.makeText(this, toastMessageId, Toast.LENGTH_SHORT);
+        }
+        Toast.makeText(getActivity(), toastMessageId, Toast.LENGTH_SHORT).show();
+
+        //if (mAnswered==mQuestionsBank.length)
+        if (globals.getAnsweredQuestionsCount()==globals.getQuestionsCount())
+        {
+            toastMessageId = R.string.final_notification;
+            //String message = getString(toastMessageId)+" "+mCorrectCount+" / "+mQuestionsBank.length;
+            String message = getString(toastMessageId)+" "+globals.getCorrectAnswersCount()+" / "+globals.getQuestionsCount();
+            Toast toast1 = Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT);
+            toast1.show();
         }
 
-        Toast.makeText(getActivity(), toastMessageId, Toast.LENGTH_SHORT).show();
+        Log.d("Answer Count",Integer.toString(globals.getAnsweredQuestionsCount()));
+        Log.d("Answer Correct",Integer.toString(globals.getCorrectAnswersCount()));
+        Log.d("Answer All Questions",Integer.toString(globals.getQuestionsCount()));
     }
 
 }

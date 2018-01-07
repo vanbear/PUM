@@ -48,7 +48,8 @@ This means, in which direction it's contents should align.
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="24dp" />
+        android:padding="24dp"
+        android:text="Treść pytania"/>
     <!--
     see:
     https://developer.android.com/guide/topics/resources/more-resources.html#Dimension

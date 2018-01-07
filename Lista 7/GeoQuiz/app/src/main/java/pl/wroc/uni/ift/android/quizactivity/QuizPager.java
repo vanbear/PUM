@@ -46,6 +46,12 @@ public class QuizPager extends FragmentActivity {
             public int getCount() {
                 return mQuestions.size();
             }
+
+            @Override
+            public int getItemPosition(Object object) {
+                return POSITION_NONE;
+            }
+
         });
         mIndex = getIntent().getIntExtra("currentQuestion",0);
         mViewPager.setCurrentItem(mIndex);

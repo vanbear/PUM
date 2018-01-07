@@ -13,6 +13,7 @@ public class Question implements Parcelable {
     private int mTextResId;
     private boolean mAnswerTrue;
     private boolean wasCheated;
+    private boolean mIsAnswered;
 
     public boolean getWasCheated() {
         return wasCheated;
@@ -27,6 +28,7 @@ public class Question implements Parcelable {
         mTextResId=textResId;
         mAnswerTrue = answerTrue;
         wasCheated = false;
+        mIsAnswered = false;
     }
 
 
@@ -75,4 +77,14 @@ public class Question implements Parcelable {
     public void setAnswerTrue(boolean answerTrue) {
         mAnswerTrue = answerTrue;
     }
+
+    public boolean checkIsAnswered() {
+        return mIsAnswered;
+    }
+
+    public void setAnswered(boolean state)
+    {
+        mIsAnswered = state;
+    }
+
 }

@@ -26,7 +26,7 @@ public class QuestionListFragment extends Fragment {
     private int adapterIndex;
     private RecyclerView.LayoutManager mLayoutManager;
 
-
+    Globals globals = Globals.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,12 @@ public class QuestionListFragment extends Fragment {
                 Question q = new Question(R.string.question_nowe,true);
                 QuestionBank questionBank = QuestionBank.getInstance();
                 questionBank.addQuestion(q);
+
                 mAdapter.notifyDataSetChanged();
+                globals.setQuestionsCount(questionBank.size());
+
+                Log.d("Answer AllQuestionsList",Integer.toString(questionBank.size()));
+
                 return true;
             case R.id.action_quit:
                 System.exit(0);
@@ -105,6 +110,8 @@ public class QuestionListFragment extends Fragment {
             Intent intent  = QuizPager.newIntent(getActivity(), mQuestion.getTextResId());
             adapterIndex = mAdapter.mQuestions.indexOf(mQuestion);
             intent.putExtra("currentQuestion",adapterIndex);
+            QuestionBank questionBank = QuestionBank.getInstance();
+            globals.setQuestionsCount(questionBank.size());
             //Log.d("Click","Click!"+Integer.toString(adapterIndex));
             startActivity(intent);
         }
@@ -129,6 +136,8 @@ public class QuestionListFragment extends Fragment {
         }
         @Override
         public int getItemCount() {return mQuestions.size();}
+
+
     }
 }
 

@@ -14,11 +14,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".CheatActivity" />
 
         <activity
             android:name=".QuizPager"
             android:label="@string/title_activity_quiz_pager"
+            android:parentActivityName=".QuestionListActivity"
             android:theme="@style/AppTheme" />
 
     </application>
