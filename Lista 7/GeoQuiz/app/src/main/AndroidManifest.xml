@@ -24,7 +24,8 @@
         <activity
             android:name=".SummaryActivity"
             android:label="@string/title_activity_summary"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".QuestionListActivity"/>
     </application>
 
 </manifest>

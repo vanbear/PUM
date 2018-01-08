@@ -24,12 +24,14 @@ public class CheatActivity extends AppCompatActivity {
 
     boolean wasShown;
     boolean mAnswer;
-    int mCheatTokens;
+    //int mCheatTokens;
 
+    Globals globals = Globals.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if(savedInstanceState != null)
         {
             setAnswerShown(savedInstanceState.getBoolean("wasShown"));
@@ -42,7 +44,7 @@ public class CheatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cheat);
 
         mCheatTokensTextView = (TextView) findViewById(R.id.cheatTokensTextView);
-        mCheatTokens =  getIntent().getIntExtra(KEY_TOKENS,0);
+        //mCheatTokens =  getIntent().getIntExtra(KEY_TOKENS,0);
         updateTokenCount();
 
         mAnswer = getIntent().getBooleanExtra(EXTRA_KEY_ANSWER,false);
@@ -53,7 +55,8 @@ public class CheatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 int toastMessageId;
-                if (mCheatTokens<=0)
+                //if (mCheatTokens<=0)
+                if (globals.getCheatTokensCount() <= 0)
                 {
                     toastMessageId = R.string.NoTokens;
                 }
@@ -67,7 +70,8 @@ public class CheatActivity extends AppCompatActivity {
                     setAnswerShown(true);
                     wasShown=true;
                     toastMessageId = R.string.UsedToken;
-                    mCheatTokens--;
+                    globals.setCheatTokensCount(globals.getCheatTokensCount()-1);
+                    // mCheatTokens--;
                     updateTokenCount();
                 }
                 Toast.makeText(CheatActivity.this, toastMessageId, Toast.LENGTH_SHORT).show();
@@ -92,7 +96,7 @@ public class CheatActivity extends AppCompatActivity {
     {
         savedInstanceState.putBoolean("mAnswer",mAnswer);
         savedInstanceState.putBoolean(EXTRA_KEY_SHOWN,wasShown);
-        savedInstanceState.putInt(KEY_TOKENS,mCheatTokens);
+        //savedInstanceState.putInt(KEY_TOKENS,mCheatTokens);
         //Log.i("save_wasShown","Save Instance wasShown: "+Boolean.toString(wasShown));
         super.onSaveInstanceState(savedInstanceState);
     }
@@ -112,7 +116,7 @@ public class CheatActivity extends AppCompatActivity {
         }
         setAnswerShown(wasShown);
 
-        mCheatTokens = savedInstanceState.getInt(KEY_TOKENS);
+        //mCheatTokens = savedInstanceState.getInt(KEY_TOKENS);
         updateTokenCount();
         //Log.i("restore_wasShown_after","Restore Instance wasShown after if: "+Boolean.toString(wasShown));
     }
@@ -142,9 +146,9 @@ public class CheatActivity extends AppCompatActivity {
 
     private void updateTokenCount()
     {
-        mCheatTokensTextView.setText("Dostępnych podejrzeń: "+Integer.toString(mCheatTokens));
+        mCheatTokensTextView.setText("Dostępnych podejrzeń: "+Integer.toString(globals.getCheatTokensCount()));
         Intent data = new Intent();
-        data.putExtra(KEY_TOKENS, mCheatTokens);
+        //data.putExtra(KEY_TOKENS, mCheatTokens);
         setResult(RESULT_OK, data);
 
     }

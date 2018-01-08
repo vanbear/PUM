@@ -12,6 +12,16 @@ public class Globals{
     private int QuestionsCount = 0;
     private int AnsweredQuestionsCount = 0;
     private int CorrectAnswersCount = 0;
+    private int CheatTokensCount = 3;
+
+
+    public int getCheatTokensCount() {
+        return CheatTokensCount;
+    }
+
+    public void setCheatTokensCount(int cheatTokensCount) {
+        CheatTokensCount = cheatTokensCount;
+    }
 
     public int getQuestionsCount() {
         return QuestionsCount;

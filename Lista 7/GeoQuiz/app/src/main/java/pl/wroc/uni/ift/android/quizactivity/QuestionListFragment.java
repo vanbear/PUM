@@ -114,6 +114,7 @@ public class QuestionListFragment extends Fragment {
             globals.setQuestionsCount(questionBank.size());
             globals.setAnsweredQuestionsCount(0);
             globals.setCorrectAnswersCount(0);
+            globals.setCheatTokensCount(3);
             //Log.d("Click","Click!"+Integer.toString(adapterIndex));
             startActivity(intent);
         }

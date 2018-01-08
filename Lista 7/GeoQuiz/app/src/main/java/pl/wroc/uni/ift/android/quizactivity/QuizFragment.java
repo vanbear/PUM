@@ -30,7 +30,7 @@ public class QuizFragment extends Fragment {
 
     private static final int CHEAT_REQEST_CODE = 0;
 
-    private int mCheatTokens = 3;
+    //private int mCheatTokens = 3;
 
     private Button mTrueButton;
     private Button mFalseButton;
@@ -80,7 +80,7 @@ public class QuizFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             //mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
-            mCheatTokens = savedInstanceState.getInt(KEY_TOKENS);
+            //mCheatTokens = savedInstanceState.getInt(KEY_TOKENS);
 //            mAnswered = savedInstanceState.getInt(KEY_ANSWERED);
 //            mCorrectCount = savedInstanceState.getInt(KEY_CORRECT);
 
@@ -115,7 +115,7 @@ public class QuizFragment extends Fragment {
 
                 boolean currentAnswer = mQuestionsBank[mCurrentIndex].isAnswerTrue();
                 boolean IsCheated =  mQuestionsBank[mCurrentIndex].getWasCheated();
-                Intent intent = CheatActivity.newIntent(getActivity(), currentAnswer, IsCheated, mCheatTokens);
+                Intent intent = CheatActivity.newIntent(getActivity(), currentAnswer, IsCheated, globals.getCheatTokensCount());
 //
 //                Intent intent = new Intent(QuizActivity.this, CheatActivity.class);
 //                boolean currentAnswer = mQuestionsBank[mCurrentIndex].isAnswerTrue();
@@ -213,8 +213,8 @@ public class QuizFragment extends Fragment {
                     mQuestionsBank[mCurrentIndex].setWasCheated(true);
                 }
 
-                mCheatTokens = CheatActivity.getCheatTokens(data);
-                Log.d("Tokens result",Integer.toString(mCheatTokens));
+                //mCheatTokens = CheatActivity.getCheatTokens(data);
+                //Log.d("Tokens result",Integer.toString(mCheatTokens));
 
             }
         }
@@ -233,7 +233,7 @@ public class QuizFragment extends Fragment {
         // because Question is implementing Parcelable interface
         // we are able to store array in Bundle
         savedInstanceState.putParcelableArray(KEY_QUESTIONS, mQuestionsBank);
-        savedInstanceState.putInt(KEY_TOKENS,mCheatTokens);
+        //savedInstanceState.putInt(KEY_TOKENS,mCheatTokens);
     }
 
 //    @Override
