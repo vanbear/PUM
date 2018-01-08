@@ -19,7 +19,7 @@
     <string name="final_notification">Punkty:</string>
 
     <string name="button_show_label">Show Answer</string>
-    <string name="button_questionlist_label">Show Questions</string>
+    <string name="button_questionlist_label">Powrót</string>
     <string name="warning_text_view_label">Czy na pewno chcesz to zrobić</string>
     <string name="cheat_button_label">Cheat</string>
 
@@ -36,7 +36,6 @@
     <string name="action_add">Add</string>
     <string name="action_quit">Quit</string>
     <string name="title_activity_summary">SummaryActivity</string>
-    <string name="title_activity_asdasdasd">asdasdasd</string>
 
 
 </resources>

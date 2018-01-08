@@ -93,24 +93,6 @@ This means, in which direction it's contents should align.
             android:text="@string/true_button" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageButton
-            android:id="@+id/previous_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:src="@drawable/arrow_left"/>
-
-        <ImageButton
-            android:id="@+id/next_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:src="@drawable/arrow_right"/>
-    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"

@@ -129,9 +129,7 @@ public class QuizFragment extends Fragment {
         mQuestionListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),QuestionListActivity.class);
-                startActivity(intent);
-
+                getActivity().finish();
             }
         });
 
@@ -163,27 +161,6 @@ public class QuizFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 checkAnswer(false);
-            }
-        });
-
-        mNextButton = (ImageButton) view.findViewById(R.id.next_button);
-        mNextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCurrentIndex = (mCurrentIndex + 1) % mQuestionsBank.length;
-                updateQuestion();
-            }
-        });
-
-        mPrevButton = (ImageButton) view.findViewById(R.id.previous_button);
-        mPrevButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mCurrentIndex == 0)
-                    mCurrentIndex = mQuestionsBank.length - 1;
-                else
-                    mCurrentIndex = (mCurrentIndex - 1);
-                updateQuestion();
             }
         });
 
