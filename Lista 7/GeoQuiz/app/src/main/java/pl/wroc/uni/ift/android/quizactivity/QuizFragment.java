@@ -280,11 +280,8 @@ public class QuizFragment extends Fragment {
         //if (mAnswered==mQuestionsBank.length)
         if (globals.getAnsweredQuestionsCount()==globals.getQuestionsCount())
         {
-            toastMessageId = R.string.final_notification;
-            //String message = getString(toastMessageId)+" "+mCorrectCount+" / "+mQuestionsBank.length;
-            String message = getString(toastMessageId)+" "+globals.getCorrectAnswersCount()+" / "+globals.getQuestionsCount();
-            Toast toast1 = Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT);
-            toast1.show();
+            Intent intent = new Intent(getActivity(),SummaryActivity.class);
+            startActivity(intent);
         }
 
         Log.d("Answer Count",Integer.toString(globals.getAnsweredQuestionsCount()));

@@ -35,6 +35,7 @@
 
     <string name="action_add">Add</string>
     <string name="action_quit">Quit</string>
+    <string name="title_activity_summary">SummaryActivity</string>
 
 
 </resources>

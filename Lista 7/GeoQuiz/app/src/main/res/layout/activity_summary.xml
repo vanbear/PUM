@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pointsTitle"
+        android:gravity="center"
+        android:paddingTop="32dp"
+        android:text="Ukończyłeś Quiz!\nZdobyte punkty: "/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pointsSummary"
+        android:textSize="72dp"
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="x / x"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tokensTitle"
+        android:gravity="center"
+        android:paddingTop="32dp"
+        android:text="Pozostałych tokenów: "/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tokensSummary"
+        android:textSize="72dp"
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="x"/>
+
+
+</LinearLayout>

@@ -112,6 +112,8 @@ public class QuestionListFragment extends Fragment {
             intent.putExtra("currentQuestion",adapterIndex);
             QuestionBank questionBank = QuestionBank.getInstance();
             globals.setQuestionsCount(questionBank.size());
+            globals.setAnsweredQuestionsCount(0);
+            globals.setCorrectAnswersCount(0);
             //Log.d("Click","Click!"+Integer.toString(adapterIndex));
             startActivity(intent);
         }
