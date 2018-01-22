@@ -18,6 +18,7 @@ public class Zad1Activity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private Location mLocation;
     private Address mAddress;
+    private LatLng mLatLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,8 @@ public class Zad1Activity extends FragmentActivity implements OnMapReadyCallback
 
         Bundle bundle = getIntent().getExtras();
         if (bundle.containsKey(Constants.EXTRA_LOCATION)) {
-            mAddress = (Address) bundle.getParcelable(Constants.EXTRA_LOCATION);
+            mLatLng = (LatLng) bundle.getParcelable(Constants.EXTRA_LOCATION);
+            //mAddress = (Address) bundle.getParcelable(Constants.EXTRA_LOCATION);
         } else {
             Log.e("MapsActivity", "Location is not recived correctly");
         }
@@ -52,8 +54,8 @@ public class Zad1Activity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(mLatLng).title("Home"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(mLatLng));
     }
 }

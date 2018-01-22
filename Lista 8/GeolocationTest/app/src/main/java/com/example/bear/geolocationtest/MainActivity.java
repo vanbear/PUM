@@ -36,8 +36,9 @@ public class MainActivity extends AppCompatActivity {
     private Button mButton2;
     private EditText mEditText;
 
-    private LatLng mLocation;
+    private Location mLocation;
     private Address mAddress;
+    private LatLng mLatLng;
 
     Geocoder geocoder;
 
@@ -59,16 +60,51 @@ public class MainActivity extends AppCompatActivity {
                 try
                 {
                     mAddress = (Address) geocoder.getFromLocationName(location,1).get(0);
-                    mLocation = new LatLng(mAddress.getLatitude(), mAddress.getLongitude());
+                    mLatLng = new LatLng(mAddress.getLatitude(), mAddress.getLongitude());
                 }
                 catch (Exception e)
                 {
                     Log.e("Location Error",e.toString());
                 }
 
-                Intent checkOnMapIntent = new Intent(MainActivity.this, Zad1Activity.class);
-                checkOnMapIntent.putExtra(Constants.EXTRA_LOCATION, mLocation);
-                startActivity(checkOnMapIntent);
+                if (mLatLng!=null)
+                {
+                    Intent checkOnMapIntent = new Intent(MainActivity.this, Zad1Activity.class);
+                    Log.d("Location Error", mLatLng.toString());
+                    checkOnMapIntent.putExtra(Constants.EXTRA_LOCATION, mLatLng);
+                    startActivity(checkOnMapIntent);
+                }
+
+            }
+        });
+
+        mButton2 = (Button) findViewById(R.id.button2);
+        mButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String location = mEditText.getText().toString();
+                String locationWFiA = "plac Maxa Borna 9, Wrocław";
+                try
+                {
+                    mAddress = (Address) geocoder.getFromLocationName(location,1).get(0);
+                    Location loc1 = new Location("");
+                    loc1.setLatitude(mAddress.getLatitude());
+                    loc1.setLongitude(mAddress.getLongitude());
+
+                    Address mAdressWFiA = (Address) geocoder.getFromLocationName(locationWFiA,1).get(0);
+                    Location loc2 = new Location("");
+                    loc2.setLatitude(mAdressWFiA.getLatitude());
+                    loc2.setLongitude(mAdressWFiA.getLongitude());
+
+                    float dist = loc1.distanceTo(loc2);
+                    String s = "Distance to WFiA: "+Float.toString((dist/1000)) + "km";
+                    Toast toast = Toast.makeText(MainActivity.this,s,Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                catch (Exception e)
+                {
+                    Log.e("Location Error",e.toString());
+                }
             }
         });
     }
